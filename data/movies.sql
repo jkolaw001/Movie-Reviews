@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS review;
+DROP TABLE IF EXISTS movie;
+
 CREATE TABLE movie (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255),
@@ -7,7 +10,7 @@ CREATE TABLE movie (
 
 CREATE TABLE review (
     id SERIAL PRIMARY KEY,
-    movie_id int,
+    movie_id int REFERENCES movie(id),
     reviewer_name VARCHAR(255),
     review_text TEXT,
     rating int
