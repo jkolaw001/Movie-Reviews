@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from db_models import DBMovie, DBReview
 from schemas import MovieCreate, MovieOut, ReviewCreate, ReviewOut
 
-DATABASE_URL = "postgresql+psycopg://postgres:postgres@localhost:5432/movie_db"
+DATABASE_URL = "postgresql+psycopg://postgres:postgres@localhost:5432/movies"
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
