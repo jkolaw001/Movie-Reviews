@@ -64,6 +64,6 @@ def create_review(movie_id: int, review: ReviewCreate) -> ReviewOut:
 def get_reviews(movie_id: int) -> list[ReviewOut]:
     # TODO: implement this function
     # 1) Get all of the reviews for the movie identified by movie_id
-    # 2) Turn the list of DBMovies into a list of MovieOuts
+    # 2) Turn the list of DBMovies into a list of ReviewOuts
     # 3) Return it
     return []
