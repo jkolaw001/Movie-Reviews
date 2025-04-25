@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
 
@@ -13,7 +13,7 @@ class DBMovie(Base):
     year = Column(Integer, nullable=False)
 
 
-class DBReview():
+class DBReview:
     # TODO: implement this class
     # - make sure DBReview inherits from Base!!!!
     # - look in data/movies.sql to see what fields a review has
