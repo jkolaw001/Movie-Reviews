@@ -7,12 +7,13 @@ DATABASE_URL = "postgresql+psycopg://postgres:postgres@localhost:5432/movies"
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(bind=engine)
+db = SessionLocal()
 
 
 def get_movies() -> list[MovieOut]:
     db = SessionLocal()
     # TODO: update the line below get all of the movies out of the database
-    db_movies = []  # <-- this list should NOT be empty
+    db_movies = db.query(DBMovie).all()
 
     movies = []
     for db_movie in db_movies:
@@ -35,6 +36,16 @@ def get_movie(movie_id: int) -> MovieOut | None:
     # TODO: implement the rest of this function
     # 1) Turn the DBMovie into a MovieOut
     # 2) Return it
+    movie = None
+    if db_movie:
+        movie = MovieOut(
+            id=db_movie.id,
+            title=db_movie.title,
+            director=db_movie.director,
+            year=db_movie.year,
+        )
+    db.close()
+    return movie
 
 
 def create_movie(movie: MovieCreate) -> MovieOut:

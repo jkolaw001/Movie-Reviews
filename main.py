@@ -2,27 +2,28 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from pathlib import Path
 from schemas import MovieCreate, MovieOut, ReviewCreate, ReviewOut
-import db
+from db import db, get_movie, get_movies, get_reviews, create_movie
+from typing import List
 
 app = FastAPI()
 
 
 @app.get("/api/movies")
-async def get_movies() -> list[MovieOut]:
-    return db.get_movies()
+async def endpoint_get_movies() -> list[MovieOut]:
+    return get_movies()
 
 
 @app.get("/api/movies/{movie_id}")
-async def get_movie(movie_id: int) -> MovieOut:
-    movie = db.get_movie(movie_id)
+async def endpoint_get_movie(movie_id: int) -> MovieOut:
+    movie = get_movie(movie_id)
     if not movie:
         raise HTTPException(status_code=404, detail="Item not found")
     return movie
 
 
 @app.post("/api/movies")
-async def create_movie(movie: MovieCreate) -> MovieOut:
-    movie = db.create_movie(movie)
+async def endpoint_create_movie(movie: MovieCreate) -> MovieOut:
+    movie = create_movie(movie)
     return movie
 
 
