@@ -16,7 +16,7 @@ async def get_movies() -> list[MovieOut]:
 async def get_movie(movie_id: int) -> MovieOut:
     movie = db.get_movie(movie_id)
     if not movie:
-        raise HTTPException(status_code=404, detail='Item not found')
+        raise HTTPException(status_code=404, detail="Item not found")
     return movie
 
 
@@ -39,8 +39,8 @@ async def get_reviews(movie_id: int) -> list[ReviewOut]:
 
 # Route to handle requests for static assets
 # this is a catch all so it should be registered last
-@app.get('/{file_path}', response_class=FileResponse)
+@app.get("/{file_path}", response_class=FileResponse)
 def get_static_file(file_path: str):
-    if Path('static/' + file_path).is_file():
-        return 'static/' + file_path
-    raise HTTPException(status_code=404, detail='Item not found')
+    if Path("static/" + file_path).is_file():
+        return "static/" + file_path
+    raise HTTPException(status_code=404, detail="Item not found")

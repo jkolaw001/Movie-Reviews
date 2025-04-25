@@ -1,32 +1,32 @@
-
-const movieForm = document.getElementById('movie-form');
-movieForm.addEventListener('submit', addMovie );
+// @ts-check
+const movieForm = document.getElementById("movie-form");
+movieForm.addEventListener("submit", addMovie);
 
 async function addMovie(event) {
     event.preventDefault();
 
-    const title = document.getElementById('title').value;
-    const director = document.getElementById('director').value;
-    const year = document.getElementById('year').value;
+    const title = document.getElementById("title").value;
+    const director = document.getElementById("director").value;
+    const year = document.getElementById("year").value;
     const body = JSON.stringify({
         title: title,
         director: director,
-        year: year
+        year: year,
     });
-    const headers = {'Content-Type': 'application/json'};
+    const headers = { "Content-Type": "application/json" };
 
     try {
-        const response = await fetch('/api/movies', {
-            method: 'POST',
+        const response = await fetch("/api/movies", {
+            method: "POST",
             headers: headers,
-            body: body
+            body: body,
         });
-        if (! response.ok) {
-            throw new Error('Failed to create movie');
+        if (!response.ok) {
+            throw new Error("Failed to create movie");
         }
 
-        window.location.href = 'index.html';
+        window.location.href = "index.html";
     } catch (error) {
-        console.error('Error creating movie:', error);
+        console.error("Error creating movie:", error);
     }
 }

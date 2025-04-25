@@ -16,12 +16,14 @@ def get_movies() -> list[MovieOut]:
 
     movies = []
     for db_movie in db_movies:
-        movies.append(MovieOut(
-            id=db_movie.id,
-            title=db_movie.title,
-            director=db_movie.director,
-            year=db_movie.year
-        ))
+        movies.append(
+            MovieOut(
+                id=db_movie.id,
+                title=db_movie.title,
+                director=db_movie.director,
+                year=db_movie.year,
+            )
+        )
     db.close()
     return movies
 
@@ -45,7 +47,7 @@ def create_movie(movie: MovieCreate) -> MovieOut:
         id=db_movie.id,
         title=db_movie.title,
         director=db_movie.director,
-        year=db_movie.year
+        year=db_movie.year,
     )
     db.close()
     return movie

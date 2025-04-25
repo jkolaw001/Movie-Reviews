@@ -1,11 +1,10 @@
-
-const reviewForm = document.getElementById('review-form');
-reviewForm.addEventListener('submit', addReview);
-console.log("this is happening");
+// @ts-check
+const reviewForm = document.getElementById("review-form");
+reviewForm.addEventListener("submit", addReview);
 
 async function addReview(event) {
     event.preventDefault();
-    
+
     // TODO: complete this function
     // 1) gather all of the fields for the new task
 
