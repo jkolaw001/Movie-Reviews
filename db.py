@@ -69,12 +69,43 @@ def create_review(movie_id: int, review: ReviewCreate) -> ReviewOut:
     # 1) Create a db model object
     # 2) Add it to the database
     # 3) Refresh the db model and then return it as a ReviewOut
-    return None
+    db = SessionLocal()
+
+    db_object = db.query(DBMovie).filter(DBMovie.id == movie_id).first()
+
+    if not db_object:
+        db.close()
+        raise ValueError
+
+    db_review = DBReview(**review.model_dump(), movie_id=movie_id)
+    db.add(db_review)
+    db.commit()
+    db.refresh(db_review)
+
+    review = ReviewOut(
+        id=db_review.id,
+        movie_id=db_object.id,
+        reviewer_name=db_review.reviewer_name,
+        review_text=db_review.review_text,
+        rating=db_review.rating,
+    )
+    db.close()
+    return review
 
 
 def get_reviews(movie_id: int) -> list[ReviewOut]:
-    # TODO: implement this function
-    # 1) Get all of the reviews for the movie identified by movie_id
-    # 2) Turn the list of DBMovies into a list of ReviewOuts
-    # 3) Return it
-    return []
+    db = SessionLocal()
+    db_reviews = db.query(DBReview).filter(DBReview.movie_id == movie_id).all()
+
+    reviews = [
+        ReviewOut(
+            id=db_review.id,
+            movie_id=db_review.movie_id,
+            reviewer_name=db_review.reviewer_name,
+            review_text=db_review.review_text,
+            rating=db_review.rating,
+        )
+        for db_review in db_reviews
+    ]
+    db.close()
+    return reviews

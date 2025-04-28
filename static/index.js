@@ -19,7 +19,6 @@ async function loadMovies() {
             )
             .join("");
 
-        // Add click event listeners to each movie item
         document.querySelectorAll(".movie-item").forEach((item) => {
             item.addEventListener("click", function () {
                 const movieId = this.getAttribute("data-id");

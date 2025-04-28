@@ -2,7 +2,13 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from pathlib import Path
 from schemas import MovieCreate, MovieOut, ReviewCreate, ReviewOut
-from db import db, get_movie, get_movies, get_reviews, create_movie
+from db import (
+    get_movie,
+    get_movies,
+    get_reviews,
+    create_movie,
+    create_review,
+)
 from typing import List
 
 app = FastAPI()
@@ -28,14 +34,17 @@ async def endpoint_create_movie(movie: MovieCreate) -> MovieOut:
 
 
 @app.post("/api/movies/{movie_id}/reviews")
-async def create_review(movie_id: int, review: ReviewCreate) -> ReviewOut:
-    review = db.create_review(movie_id, review)
+async def endpoint_create_review(
+    movie_id: int, review: ReviewCreate
+) -> ReviewOut:
+    review = create_review(movie_id, review)
     return review
 
 
 @app.get("/api/movies/{movie_id}/reviews")
-async def get_reviews(movie_id: int) -> list[ReviewOut]:
-    return db.get_reviews(movie_id)
+async def endpoint_get_reviews(movie_id: int) -> list[ReviewOut]:
+    reviews = get_reviews(movie_id)
+    return reviews
 
 
 # Route to handle requests for static assets
