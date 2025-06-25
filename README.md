@@ -2,6 +2,9 @@
 
 A simple web application for browsing movies and adding reviews, built with FastAPI, SQLAlchemy, PostgreSQL, and a vanilla JS frontend.
 
+![image](https://github.com/user-attachments/assets/06525ee9-2a08-4a54-a2d1-22acf8860abc)
+![image](https://github.com/user-attachments/assets/39761735-78af-4308-995e-24362a155e11)
+
 ---
 
 ## Features
